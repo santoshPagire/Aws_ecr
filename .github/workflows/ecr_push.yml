@@ -33,12 +33,8 @@ jobs:
     - name: Build Docker image locally
       run: |
           docker build -t my-local-image:latest .
-          
-    - name: Images after building new image
-      run: |
-          docker images
-    
-    - name: Build, tag, and push docker image to Amazon ECR
+            
+    - name: Tag, and push docker image to Amazon ECR
       env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: sample-repo
@@ -46,3 +42,7 @@ jobs:
       run: |
           docker tag my-local-image:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+    - name: Images after building new image
+      run: |
+              docker images
