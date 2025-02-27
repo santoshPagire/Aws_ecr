@@ -7,9 +7,6 @@ IMAGE_TAG=$3
 
 docker images
 
-# Pull the  image
-docker pull my-local-image:latest
-
 # Tag according to ecr
 docker tag my-local-image:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
