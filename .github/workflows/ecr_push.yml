@@ -43,6 +43,6 @@ jobs:
           docker tag my-local-image:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-    - name: Images after building new image
+    - name: List images after building and tagging
       run: |
               docker images
