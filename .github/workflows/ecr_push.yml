@@ -33,14 +33,18 @@ jobs:
     - name: Build Docker image locally
       run: |
           docker build -t my-local-image:latest .
-            
+
+    - name: Run test.sh script to pull, tag, and push Docker image
+      run: |
+          chmod +x ./script.sh  # Ensure the script is executable
+          ./script.sh ${{ steps.login-ecr.outputs.registry }} sample-repo latest
+    
     - name: Tag, and push docker image to Amazon ECR
       env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: sample-repo
           IMAGE_TAG: latest       
       run: |
-          docker tag my-local-image:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
     - name: List images after building and tagging
