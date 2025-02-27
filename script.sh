@@ -5,9 +5,11 @@ REGISTRY=$1
 REPOSITORY=$2
 IMAGE_TAG=$3
 
-docker images
+echo " ============Images Before Taging============ "
+  docker images
 
 # Tag according to ecr
 docker tag my-local-image:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-docker images
+echo " ============Images After Taging============ "
+  docker images
